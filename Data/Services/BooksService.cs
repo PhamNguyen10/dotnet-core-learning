@@ -1,6 +1,8 @@
 ﻿using my_books.Data.Models;
 using my_books.Data.Services.ViewModels;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace my_books.Data.Services
 {
@@ -13,7 +15,7 @@ namespace my_books.Data.Services
             _context = context;
         }
 
-        public void AddBook (BookVM book)
+        public void AddBook(BookVM book)
         {
             var _book = new Book()
             {
@@ -31,5 +33,8 @@ namespace my_books.Data.Services
             _context.Books.Add(_book);
             _context.SaveChanges();
         }
+        public List<Book> GetAll() => _context.Books.ToList();
+        public Book GetById(int bookId) => _context.Books.FirstOrDefault(b => b.Id == bookId);
+
     }
 }
