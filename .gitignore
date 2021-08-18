@@ -396,3 +396,5 @@ FodyWeavers.xsd
 # Additional files built by Visual Studio
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudio
+.vs/my-books/v16/
+obj/Debug/net5.0/
