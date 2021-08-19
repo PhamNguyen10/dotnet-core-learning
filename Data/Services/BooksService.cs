@@ -15,7 +15,7 @@ namespace my_books.Data.Services
             _context = context;
         }
 
-        public void AddBook(BookVM book)
+        public void Add(BookVM book)
         {
             var _book = new Book()
             {
@@ -53,6 +53,15 @@ namespace my_books.Data.Services
             }
 
             return _book;
+        }
+        public void DeleteById(int bookid)
+        {
+            var _book = _context.Books.FirstOrDefault(b => b.Id == bookid);
+            if (_book != null)
+            {
+                _context.Books.Remove(_book);
+                _context.SaveChanges();
+            }
         }
     }
 }
