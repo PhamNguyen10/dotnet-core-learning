@@ -28,11 +28,12 @@ namespace my_books
             services.AddControllers();
 
             //Configure DBcontext with SQL
-            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(ConnectionString));
+            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(ConnectionString).EnableSensitiveDataLogging());
 
 
             //Configure the Services
             services.AddTransient<BooksService>();
+
 
             services.AddSwaggerGen(c =>
             {
