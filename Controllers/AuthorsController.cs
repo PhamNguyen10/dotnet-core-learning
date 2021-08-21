@@ -6,47 +6,47 @@ namespace my_books.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BooksController : ControllerBase
+    public class AuthorsController : ControllerBase
     {
-        public BooksService _booksService;
+        public AuthorsService _authorsService { get; set; }
 
-        public BooksController(BooksService booksService)
+        public AuthorsController(AuthorsService authorsService)
         {
-            _booksService = booksService;
+            _authorsService = authorsService;
         }
 
         [HttpPost("add")]
-        public IActionResult Add([FromBody] BookVM book)
+        public IActionResult Add([FromBody] AuthorVM author)
         {
-            _booksService.Add(book);
+            _authorsService.Add(author);
             return Ok();
         }
 
         [HttpGet("get-all")]
         public IActionResult GetAll()
         {
-            var reponses = _booksService.GetAll();
+            var reponses = _authorsService.GetAll();
             return Ok(reponses);
         }
 
         [HttpGet("get/{id}")]
         public IActionResult GetById(int id)
         {
-            var reponses = _booksService.GetById(id);
+            var reponses = _authorsService.GetById(id);
             return Ok(reponses);
         }
 
         [HttpPut("edit/{id}")]
-        public IActionResult EditById(int id, [FromBody] BookVM book)
+        public IActionResult EditById(int id, [FromBody] AuthorVM author)
         {
-            var reponses = _booksService.UpdateById(id, book);
+            var reponses = _authorsService.UpdateById(id, author);
             return Ok(reponses);
         }
 
         [HttpDelete("delete/{id}")]
         public IActionResult DeleteById(int id)
         {
-            _booksService.DeleteById(id);
+            _authorsService.DeleteById(id);
             return Ok();
         }
     }

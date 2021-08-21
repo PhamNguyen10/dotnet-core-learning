@@ -14,6 +14,30 @@ namespace my_books.Data
             {
                 var context = serviceScope.ServiceProvider.GetService<AppDbContext>();
 
+                if (!context.Publishers.Any())
+                {
+                    context.Publishers.AddRange
+                    (
+                        new Publisher() { Name = "Publisher 3" },
+                        new Publisher() { Name = "Publisher 2" },
+                        new Publisher() { Name = "Publisher 1" }                    
+                    );
+
+                    context.SaveChanges();
+                }
+
+                if (!context.Authors.Any())
+                {
+                    context.Authors.AddRange
+                    (
+                        new Author() { FullName = "Authors 3" },
+                        new Author() { FullName = "Authors 2" },
+                        new Author() { FullName = "Authors 1" }
+                    );
+
+                    context.SaveChanges();
+                }
+
                 if (!context.Books.Any())
                 {
                     context.Books.AddRange
@@ -28,7 +52,10 @@ namespace my_books.Data
                             Genre = "Biography",
                             Author = "Frist Author",
                             CoverUrl = "https://www.google.com.vn",
-                            DateAdded = DateTime.Now.AddDays(-10)
+                            DateAdded = DateTime.Now.AddDays(-10),
+
+                            //Navigation
+                            PublisherId = 1
                         },
                         new Book()
                         {
@@ -40,7 +67,10 @@ namespace my_books.Data
                             Genre = "Biography",
                             Author = "Second Author",
                             CoverUrl = "https://www.google.com.vn",
-                            DateAdded = DateTime.Now.AddDays(-10)
+                            DateAdded = DateTime.Now.AddDays(-10),
+
+                            //Navigation
+                            PublisherId = 1
                         }
                     );
 
