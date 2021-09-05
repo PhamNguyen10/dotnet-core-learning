@@ -25,13 +25,23 @@ namespace my_books.Data.Services
                 DateRead = book.IsRead ? book.DateRead.Value : null,
                 Rate = book.IsRead ? book.Rate.Value : null,
                 Genre = book.Genre,
-                Author = book.Author,
                 CoverUrl = book.CoverUrl,
-                DateAdded = DateTime.Now
+                DateAdded = DateTime.Now,
+                PublisherId = book.PublisherId,
             };
-
             _context.Books.Add(_book);
             _context.SaveChanges();
+
+            foreach (var id in book.AuthorIds)
+            {
+                var _book_author = new Book_Author()
+                {
+                    BookId = _book.Id,
+                    AuthorId = id
+                };
+                _context.Book_Authors.Add(_book_author);
+                _context.SaveChanges();
+            }
         }
         public List<Book> GetAll() => _context.Books.ToList();
         public Book GetById(int bookId) => _context.Books.FirstOrDefault(b => b.Id == bookId);
@@ -46,7 +56,6 @@ namespace my_books.Data.Services
                 _book.DateRead = bookVM.IsRead ? bookVM.DateRead.Value : null;
                 _book.Rate = bookVM.IsRead ? bookVM.Rate.Value : null;
                 _book.Genre = bookVM.Genre;
-                _book.Author = bookVM.Author;
                 _book.CoverUrl = bookVM.CoverUrl;
 
                 _context.SaveChanges();

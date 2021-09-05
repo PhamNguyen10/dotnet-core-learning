@@ -50,7 +50,6 @@ namespace my_books.Data
                             DateRead = DateTime.Now.AddDays(-10),
                             Rate = 4,
                             Genre = "Biography",
-                            Author = "Frist Author",
                             CoverUrl = "https://www.google.com.vn",
                             DateAdded = DateTime.Now.AddDays(-10),
 
@@ -65,7 +64,6 @@ namespace my_books.Data
                             DateRead = DateTime.Now.AddDays(-10),
                             Rate = 4,
                             Genre = "Biography",
-                            Author = "Second Author",
                             CoverUrl = "https://www.google.com.vn",
                             DateAdded = DateTime.Now.AddDays(-10),
 

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using my_books.Data.Models;
+using System;
+using System.Collections.Generic;
 
 namespace my_books.Data.Services.ViewModels
 {
@@ -12,5 +14,9 @@ namespace my_books.Data.Services.ViewModels
         public string Genre { get; set; }
         public string Author { get; set; }
         public string CoverUrl { get; set; }
+
+        //Navigation
+        public int PublisherId { get; set; }
+        public List<int> AuthorIds { get; set; }
     }
 }
