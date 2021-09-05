@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using my_books.Data.Models;
 using my_books.Data.Services;
 using my_books.Data.Services.ViewModels;
+using System.Collections.Generic;
 
 namespace my_books.Controllers
 {
@@ -16,35 +18,56 @@ namespace my_books.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult Add([FromBody] BookVM book)
+        public ActionResult<Book> Add([FromBody] BookVM book)
         {
             _booksService.Add(book);
             return Ok();
         }
 
         [HttpGet("get-all")]
-        public IActionResult GetAll()
+        public ActionResult<List<Book>> GetAll()
         {
-            var reponses = _booksService.GetAll();
-            return Ok(reponses);
+            var _reponse = _booksService.GetAll();
+            if (_reponse != null)
+            {
+                return _reponse;
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         [HttpGet("get/{id}")]
-        public IActionResult GetById(int id)
+        public ActionResult<Book> GetById(int id)
         {
-            var reponses = _booksService.GetById(id);
-            return Ok(reponses);
+            var _reponse = _booksService.GetById(id);
+            if (_reponse != null)
+            {
+                return _reponse;
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         [HttpPut("edit/{id}")]
-        public IActionResult EditById(int id, [FromBody] BookVM book)
+        public ActionResult<Book> EditById(int id, [FromBody] BookVM book)
         {
-            var reponses = _booksService.UpdateById(id, book);
-            return Ok(reponses);
+            var _reponse = _booksService.UpdateById(id, book);
+            if (_reponse != null)
+            {
+                return _reponse;
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         [HttpDelete("delete/{id}")]
-        public IActionResult DeleteById(int id)
+        public ActionResult<Book> DeleteById(int id)
         {
             _booksService.DeleteById(id);
             return Ok();

@@ -1,5 +1,6 @@
 ﻿using my_books.Data.Models;
 using my_books.Data.Services.ViewModels;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace my_books.Data.Services
@@ -24,11 +25,11 @@ namespace my_books.Data.Services
             _context.SaveChanges();
         }
 
-        internal object GetAll() => _context.Publishers.ToList();
+        internal List<Publisher> GetAll() => _context.Publishers.ToList();
 
-        internal object GetById(int id) => _context.Publishers.FirstOrDefault(p => p.Id == id);
+        internal Publisher GetById(int id) => _context.Publishers.FirstOrDefault(p => p.Id == id);
 
-        internal object UpdateById(int id, PublisherVM publisher)
+        internal Publisher UpdateById(int id, PublisherVM publisher)
         {
             var _publisher = _context.Publishers.FirstOrDefault(p => p.Id == id);
             if (_publisher != null)

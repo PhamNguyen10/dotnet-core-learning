@@ -27,11 +27,11 @@ namespace my_books.Data.Services
             _context.SaveChanges();
         }
 
-        internal object GetAll() => _context.Authors.ToList();
+        internal List<Author> GetAll() => _context.Authors.ToList();
 
-        internal object GetById(int id) => _context.Authors.FirstOrDefault(a => a.Id == id);
+        internal Author GetById(int id) => _context.Authors.FirstOrDefault(a => a.Id == id);
 
-        internal object UpdateById(int id, AuthorVM author)
+        internal Author UpdateById(int id, AuthorVM author)
         {
             var _author = _context.Authors.FirstOrDefault(a => a.Id == id);
             if (_author != null)

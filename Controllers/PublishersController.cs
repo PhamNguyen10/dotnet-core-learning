@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using my_books.Data.Models;
 using my_books.Data.Services;
 using my_books.Data.Services.ViewModels;
+using System.Collections.Generic;
 
 namespace my_books.Controllers
 {
@@ -17,35 +19,56 @@ namespace my_books.Controllers
 
 
         [HttpPost("add")]
-        public IActionResult Add([FromBody] PublisherVM publisher)
+        public ActionResult<Publisher> Add([FromBody] PublisherVM publisher)
         {
             _publishersService.Add(publisher);
             return Ok();
         }
 
         [HttpGet("get-all")]
-        public IActionResult GetAll()
+        public ActionResult<List<Publisher>> GetAll()
         {
-            var reponses = _publishersService.GetAll();
-            return Ok(reponses);
+            var _reponse = _publishersService.GetAll();
+            if (_reponse != null)
+            {
+                return _reponse;
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         [HttpGet("get/{id}")]
-        public IActionResult GetById(int id)
+        public ActionResult<Publisher> GetById(int id)
         {
-            var reponses = _publishersService.GetById(id);
-            return Ok(reponses);
+            var _reponse = _publishersService.GetById(id);
+            if (_reponse != null)
+            {
+                return _reponse;
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         [HttpPut("edit/{id}")]
-        public IActionResult EditById(int id, [FromBody] PublisherVM publisher)
+        public ActionResult<Publisher> EditById(int id, [FromBody] PublisherVM publisher)
         {
-            var reponses = _publishersService.UpdateById(id, publisher);
-            return Ok(reponses);
+            var _reponse = _publishersService.UpdateById(id, publisher);
+            if (_reponse != null)
+            {
+                return _reponse;
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         [HttpDelete("delete/{id}")]
-        public IActionResult DeleteById(int id)
+        public ActionResult<Publisher> DeleteById(int id)
         {
             _publishersService.DeleteById(id);
             return Ok();
